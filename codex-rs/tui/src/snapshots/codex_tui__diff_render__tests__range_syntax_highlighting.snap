@@ -1,0 +1,59 @@
+---
+source: tui/src/diff_render.rs
+expression: lines
+---
+[
+    Line::from_iter([
+        Span::from("• ").dim(),
+        Span::from("Added").bold(),
+        Span::from(" "),
+        Span::from("Execution.range"),
+        Span::from(" "),
+        Span::from("("),
+        Span::from("+4").green(),
+        Span::from(" "),
+        Span::from("-0").red(),
+        Span::from(")"),
+    ]),
+    Line::from_iter([
+        Span::from("    "),
+        Span::from("1 ").dim(),
+        Span::from("+").green(),
+        Span::from("@").fg(Color::Rgb(250, 179, 135)),
+        Span::from("main").fg(Color::Rgb(250, 179, 135)),
+        Span::from(" {").fg(Color::Rgb(205, 214, 244)),
+    ]),
+    Line::from_iter([
+        Span::from("    "),
+        Span::from("2 ").dim(),
+        Span::from("+").green(),
+        Span::from("    ").fg(Color::Rgb(205, 214, 244)),
+        Span::from("let").fg(Color::Rgb(203, 166, 247)),
+        Span::from(" ").fg(Color::Rgb(205, 214, 244)),
+        Span::from("message").fg(Color::Rgb(205, 214, 244)),
+        Span::from(": ").fg(Color::Rgb(205, 214, 244)),
+        Span::from("String").fg(Color::Rgb(203, 166, 247)),
+        Span::from("(").fg(Color::Rgb(205, 214, 244)),
+        Span::from("\"").fg(Color::Rgb(166, 227, 161)),
+        Span::from("hello ").fg(Color::Rgb(166, 227, 161)),
+        Span::from("\\(").fg(Color::Rgb(147, 153, 178)),
+        Span::from("Range").fg(Color::Rgb(203, 166, 247)),
+        Span::from(")").fg(Color::Rgb(147, 153, 178)),
+        Span::from("\"").fg(Color::Rgb(166, 227, 161)),
+        Span::from(")").fg(Color::Rgb(205, 214, 244)),
+    ]),
+    Line::from_iter([
+        Span::from("    "),
+        Span::from("3 ").dim(),
+        Span::from("+").green(),
+        Span::from("    print(").fg(Color::Rgb(205, 214, 244)),
+        Span::from("value").fg(Color::Rgb(235, 160, 172)),
+        Span::from(": message)").fg(Color::Rgb(205, 214, 244)),
+    ]),
+    Line::from_iter([
+        Span::from("    "),
+        Span::from("4 ").dim(),
+        Span::from("+").green(),
+        Span::from("}").fg(Color::Rgb(205, 214, 244)),
+    ]),
+]

@@ -2367,6 +2367,21 @@ mod tests {
     }
 
     #[test]
+    fn range_diff_uses_range_highlighting() {
+        let mut changes: HashMap<PathBuf, FileChange> = HashMap::new();
+        changes.insert(
+            PathBuf::from("Execution.range"),
+            FileChange::Add {
+                content: "@main {\n    let message: String(\"hello \\(Range)\")\n    print(value: message)\n}\n"
+                    .to_string(),
+            },
+        );
+
+        let lines = create_diff_summary(&changes, &PathBuf::from("/"), /*wrap_cols*/ 80);
+        assert_debug_snapshot!("range_syntax_highlighting", lines);
+    }
+
+    #[test]
     fn cpp_module_extensions_use_cpp_highlighting() {
         let highlighted_tokens = [
             "cpp",
