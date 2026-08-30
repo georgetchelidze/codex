@@ -42,7 +42,6 @@ use syntect::highlighting::Style as SyntectStyle;
 use syntect::highlighting::Theme;
 use syntect::highlighting::ThemeSet;
 use syntect::parsing::Scope;
-use syntect::parsing::SyntaxDefinition;
 use syntect::parsing::SyntaxReference;
 use syntect::parsing::SyntaxSet;
 use syntect::util::LinesWithEndings;
@@ -68,18 +67,7 @@ const ANSI_ALPHA_DEFAULT: u8 = 0x01;
 const OPAQUE_ALPHA: u8 = 0xFF;
 
 fn syntax_set() -> &'static SyntaxSet {
-    SYNTAX_SET.get_or_init(|| {
-        let mut builder = two_face::syntax::extra_newlines().into_builder();
-        match SyntaxDefinition::load_from_str(
-            include_str!("../../assets/syntaxes/Range.sublime-syntax"),
-            true,
-            Some("Range"),
-        ) {
-            Ok(range) => builder.add(range),
-            Err(error) => tracing::error!(?error, "bundled Range syntax failed to parse"),
-        }
-        builder.build()
-    })
+    SYNTAX_SET.get_or_init(two_face::syntax::extra_newlines)
 }
 
 // NOTE: We intentionally do NOT emit a runtime diagnostic when an ANSI-family
@@ -1241,7 +1229,6 @@ mod tests {
             "toml",
             "xml",
             "dockerfile",
-            "range",
         ];
         for lang in languages {
             assert!(
@@ -1252,7 +1239,7 @@ mod tests {
         // Common file extensions.
         let extensions = [
             "rs", "py", "js", "ts", "rb", "go", "sh", "md", "yml", "kt", "ex", "hs", "pl", "php",
-            "css", "html", "cs", "range",
+            "css", "html", "cs",
         ];
         for ext in extensions {
             assert!(
